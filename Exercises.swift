@@ -7,6 +7,9 @@
 
 import Foundation
 
+public var masterWorkouts = Array<Workout>()
+public var masterExercises = Array<Exercise>()
+
 public class Exercise: Identifiable {
     var name:String = ""
     var sets = 0
@@ -22,4 +25,12 @@ func CreateNewWorkout(workName: String) -> Workout {
     let newWorkout = Workout()
     newWorkout.name = workName
     return newWorkout
+}
+
+func CreateNewExercise(exName: String, exSets: Int, exReps: Int) -> Exercise {
+    let newExercise = Exercise()
+    newExercise.name = exName
+    newExercise.sets = exSets
+    newExercise.reps = exReps
+    return newExercise
 }

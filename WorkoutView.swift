@@ -9,21 +9,26 @@ import SwiftUI
 
 struct WorkoutView: View {
     @State public var newWorkout = ""
-    @State public var workouts = Array<Workout>()
     var body: some View {
         VStack{
-            List {
-                Section {
-                    TextField("Add New Workout", text: $newWorkout)
-                        .keyboardType(.default)
-                        .onSubmit {
-                            workouts.append(CreateNewWorkout(workName: newWorkout))
-                        }
-                }
-                Section {
-                    ForEach(workouts) { workout in
-                        HStack {
-                            Text(workout.name)
+            NavigationView{
+                List {
+                    Section {
+                        TextField("Add New Workout", text: $newWorkout)
+                            .keyboardType(.default)
+                            .onSubmit {
+                                masterWorkouts.append(CreateNewWorkout(workName: newWorkout))
+                            }
+                    }
+                    Section {
+                        ForEach(masterWorkouts) { workout in
+                            HStack {
+                                Text(workout.name)
+                                NavigationLink{
+                                    ExercisesView()
+                                }
+                            label:{}
+                            }
                         }
                     }
                 }
