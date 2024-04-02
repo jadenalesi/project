@@ -14,6 +14,7 @@ public class Exercise: Identifiable {
     var name:String = ""
     var sets = 0
     var reps = 0
+    public var id = UUID()
 }
 
 public class Workout: Identifiable {
