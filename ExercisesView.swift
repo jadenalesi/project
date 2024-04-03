@@ -9,54 +9,72 @@ import SwiftUI
 
 struct ExercisesView: View {
     @State var multiSelect = Set<UUID>()
-    @State var newExerciseName = ""
+    @State var newExercise = ""
     @State var newExerciseSets = 1
     @State var newExerciseReps = 1
+    @State var addExerciseSheetShowing: Bool = false
+    let workout: Workout
+    
     var body: some View {
-        NavigationView{
-            VStack{
-                Section{
-                    Form{
-                        TextField(text: $newExerciseName, prompt: Text("Exercise Name")) {
-                            Text("Exercise Name")
-                        }
-                        Stepper("Sets: \(newExerciseSets)", value: $newExerciseSets)
-                        Stepper("Reps: \(newExerciseReps)",value:$newExerciseReps)
-                        Button(action: {
-                            print("Exercise Added")
-                            masterExercises.append(CreateNewExercise(exName: newExerciseName, exSets: newExerciseSets, exReps: newExerciseReps))
-                            newExerciseName = ""
-                            newExerciseSets = 1
-                            newExerciseReps = 1
-                        }) {
-                            Text("Add Exercise")
-                        }
-                    }
-                    Section{
-                        List(selection: $multiSelect){
-                            ForEach(masterExercises){ exercise in
-                                HStack {
-                                    Text(exercise.name)
-                                }
-                            }
-                        }
-                        .toolbar {EditButton()}
-                    }
-                    Section{
-                        Button(action: {
-                            print("Workout Updated")
+        NavigationView
+        {
+            VStack
+            {
+                List
+                {
+                    ForEach(masterExercises)
+                    {exercise in
+                        HStack
+                        {
+                            Text(exercise.name)
                             
-                        }) {
-                            Text("Update Workout")
+                            NavigationLink
+                            {
+                                ExDetails(exercise: exercise)
+                            }
+                        label:{}
                         }
                     }
-                    Divider()
                 }
+                .navigationBarTitleDisplayMode(.large)
+                .navigationTitle(workout.name)
+                .navigationBarItems(trailing: Button(action: {addExerciseSheetShowing.toggle()}, label: {Image(systemName: "plus")}))
+                
+                .sheet(isPresented: $addExerciseSheetShowing)
+                {
+                    VStack{
+                            TextField("Name of Exercise", text: $newExercise)
+                                .padding()
+                            
+                            Stepper("Sets: \(newExerciseSets)", value: $newExerciseSets)
+                                .padding()
+                        
+                            Stepper("Reps: \(newExerciseReps)",value: $newExerciseReps)
+                                .padding()
+                        
+                            Button(action: {AddingExercise()}, label: {Text("Add")})
+                                .padding()
+                    }
+                    .presentationDetents([.fraction(0.50)])
+                }
+                
             }
         }
     }
+    func AddingExercise()
+    {
+        guard newExercise.count > 0 else {return}
+        
+        masterExercises.append(CreateNewExercise(exName: newExercise, exSets: newExerciseSets, exReps: newExerciseReps))
+        
+        addExerciseSheetShowing.toggle()
+        
+        newExercise = ""
+        newExerciseReps = 1
+        newExerciseSets = 1
+    }
 }
 
-#Preview {
-    ExercisesView()
-}
+//#Preview {
+//    ExercisesView()
+//}

@@ -7,24 +7,26 @@
 
 import Foundation
 
-public var masterWorkouts = Array<Workout>()
-public var masterExercises = Array<Exercise>()
+public var masterWorkouts = [Workout]()
+public var masterExercises = [Exercise]()
 
 public class Exercise: Identifiable {
-    var name:String = ""
-    var sets = 0
-    var reps = 0
+    var name: String = ""
+    var sets: Int = 0
+    var reps: Int = 0
     public var id = UUID()
 }
 
 public class Workout: Identifiable {
-    var name:String = ""
+    var name: String = ""
+    var day = Date()
     var exercises = [Exercise()]
 }
 
-func CreateNewWorkout(workName: String) -> Workout {
+func CreateNewWorkout(workName: String, workDay: Date) -> Workout {
     let newWorkout = Workout()
     newWorkout.name = workName
+    newWorkout.day = workDay
     return newWorkout
 }
 
