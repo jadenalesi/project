@@ -12,15 +12,15 @@ public var masterExercises = [Exercise]()
 
 public class Exercise: Identifiable {
     var name: String = ""
-    var sets: Int = 0
-    var reps: Int = 0
+    var sets: Int = 1
+    var reps: Int = 1
     public var id = UUID()
 }
 
 public class Workout: Identifiable {
     var name: String = ""
     var day = Date()
-    var exercises = [Exercise()]
+    var exercises = [Exercise]()
 }
 
 func CreateNewWorkout(workName: String, workDay: Date) -> Workout {
@@ -36,4 +36,14 @@ func CreateNewExercise(exName: String, exSets: Int, exReps: Int) -> Exercise {
     newExercise.sets = exSets
     newExercise.reps = exReps
     return newExercise
+}
+
+func GetExercises(day: Date) -> [Exercise] {
+    var newExerciseList = [Exercise]()
+    for workout in masterWorkouts {
+        if (workout.day == day) {
+            newExerciseList = workout.exercises
+        }
+    }
+    return newExerciseList
 }

@@ -15,19 +15,12 @@ import SwiftUI
  */
 
 struct Splash_Screen_View: View {
-    @State private var active = false
+    @Binding var active: Bool
     @State private var size = 0.8
     @State private var opacity = 0.5
+    @State var isLoggedIn: Bool = false
     
     var body: some View {
-        
-        if active
-        {
-            Login_Signup_View()
-        }
-        
-        else
-        {
             ZStack
             {
                 
@@ -56,18 +49,17 @@ struct Splash_Screen_View: View {
             
             .onAppear
             {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 6.0)
                 {
                     withAnimation(.easeOut(duration: 0.5))
                     {
-                        self.active = true
+                        active = true
                     }
                 }
             }
         }
     }
-}
 
-#Preview {
-    Splash_Screen_View()
-}
+//#Preview {
+ //   Splash_Screen_View()
+//}

@@ -15,10 +15,10 @@ struct Login_Signup_View: View {
     @State private var username = ""
     @State private var password = ""
     @State private var opacity = 0.4
+    @Binding var isLoggedIn: Bool
     
     var body: some View {
-        NavigationStack
-        {
+        NavigationStack{
             ZStack
             {
                 VStack
@@ -46,10 +46,9 @@ struct Login_Signup_View: View {
                                 .cornerRadius(5)
                                 .padding()
                         }
-                        NavigationLink
+                        Button
                         {
-                            CalendarView()
-                                .navigationBarBackButtonHidden(true)
+                            isLoggedIn = true
                         }label: {
                             Text("Go")
                                 .foregroundColor(.white)
@@ -82,6 +81,6 @@ struct Login_Signup_View: View {
     }
 }
 
-#Preview {
-    Login_Signup_View()
-}
+//#Preview {
+//    Login_Signup_View()
+//}
