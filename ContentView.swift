@@ -12,14 +12,16 @@ struct ContentView: View {
     @State var active: Bool = false
     var body: some View {
         if !active{
-            if !isLoggedIn {
+            Splash_Screen_View(active:$active)
+        }
+        else if !isLoggedIn {
                 Login_Signup_View(isLoggedIn: $isLoggedIn)
-            } else {
+            } 
+        else {
                 MainContentView()
             }
         }
     }
-}
 
 struct MainContentView: View {
     var body: some View {
