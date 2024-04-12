@@ -73,6 +73,7 @@ struct WorkoutView: View {
         
         masterWorkouts.append(CreateNewWorkout(workName: newWorkout, workDay: newWorkoutDay))
         
+        
         addWorkoutSheetShowing.toggle()
         
         newWorkout = ""

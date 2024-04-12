@@ -11,6 +11,7 @@ struct Signup_View: View {
     @State private var username = ""
     @State private var password = ""
     @State private var arrowSize = 0.3
+    @State var isLoggedIn: Bool = false
     
     var body: some View {
         NavigationStack
@@ -47,7 +48,7 @@ struct Signup_View: View {
                     
                     NavigationLink
                     {
-                        Login_Signup_View()
+                        Login_Signup_View(isLoggedIn: $isLoggedIn)
                             .navigationBarBackButtonHidden(true)
                     }label: {
                         Text("Signin")

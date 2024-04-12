@@ -66,6 +66,7 @@ struct ExercisesView: View {
         guard newExercise.count > 0 else {return}
         
         masterExercises.append(CreateNewExercise(exName: newExercise, exSets: newExerciseSets, exReps: newExerciseReps))
+        workout.exercises.append(CreateNewExercise(exName: newExercise, exSets: newExerciseSets, exReps: newExerciseReps))
         
         addExerciseSheetShowing.toggle()
         

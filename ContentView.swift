@@ -6,34 +6,22 @@
 //
 
 import SwiftUI
-import FirebaseCore
-
-
-class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    FirebaseApp.configure()
-
-    return true
-  }
-}
-
-@main
-struct YourApp: App {
-  // register app delegate for Firebase setup
-  @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-
-
-  var body: some Scene {
-    WindowGroup {
-      NavigationView {
-        ContentView()
-      }
-    }
-  }
-}
 
 struct ContentView: View {
+    @State var isLoggedIn: Bool = false
+    @State var active: Bool = false
+    var body: some View {
+        if !active{
+            if !isLoggedIn {
+                Login_Signup_View(isLoggedIn: $isLoggedIn)
+            } else {
+                MainContentView()
+            }
+        }
+    }
+}
+
+struct MainContentView: View {
     var body: some View {
         VStack {
             TabView {
@@ -67,5 +55,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    MainContentView()
 }
