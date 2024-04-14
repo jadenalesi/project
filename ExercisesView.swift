@@ -22,7 +22,7 @@ struct ExercisesView: View {
             {
                 List
                 {
-                    ForEach(masterExercises)
+                    ForEach(workout.exercises)
                     {exercise in
                         HStack
                         {
