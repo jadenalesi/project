@@ -11,7 +11,8 @@ struct Signup_View: View {
     @State private var username = ""
     @State private var password = ""
     @State private var arrowSize = 0.3
-    @State var isLoggedIn: Bool = false
+    @Binding var isSignedUp:Bool
+    @State var isLoggedIn:Bool = false
     
     var body: some View {
         NavigationStack
@@ -31,39 +32,33 @@ struct Signup_View: View {
                         .padding([.leading, .bottom, .trailing])
                         .foregroundColor(.black)
                     
-                    HStack
-                    {
-                        TextField("New Username", text: $username)
-                            .frame(width: 200, height: 35)
-                            .textFieldStyle(.roundedBorder)
-                    }
+                    TextField("New Username", text: $username)
+                        .frame(width: 200, height: 35)
+                        .textFieldStyle(.roundedBorder)
+                        .disableAutocorrection(true)
+                        .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                    
                     
                     TextField("New Password", text: $password)
                         .frame(width: 200, height: 35)
+                        .disableAutocorrection(true)
+                        .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                         .textFieldStyle(.roundedBorder)
-                    
-                    Text("Hit the arrow button when you are finished.")
-                        .foregroundColor(.black)
-                        .font(/*@START_MENU_TOKEN@*/.footnote/*@END_MENU_TOKEN@*/)
-                    
-                    NavigationLink
+                    Button
                     {
-                        Login_Signup_View(isLoggedIn: $isLoggedIn)
-                            .navigationBarBackButtonHidden(true)
-                    }label: {
-                        Text("Signin")
-                            .background(Color(.blue))
-                            .foregroundColor(.white)
-                    }
-                    .frame(width: 70, height: 50)
-                    .background(Color(.blue))
-                    .cornerRadius(25)
+                        isSignedUp = true
+                    }label: {Text("Sign Up")}
+                        .foregroundColor(.white)
+                        .frame(width: 80, height: 50)
+                        .background(Color(.blue))
+                        .cornerRadius(25)
                 }
             }
         }
     }
 }
 
-#Preview {
-    Signup_View()
-}
+
+//#Preview {
+//    Signup_View()
+//}

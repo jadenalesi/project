@@ -15,6 +15,7 @@ struct Login_Signup_View: View {
     @State private var username = ""
     @State private var password = ""
     @State private var opacity = 0.4
+    @State var isSignedUp: Bool = false
     @Binding var isLoggedIn: Bool
     
     var body: some View {
@@ -24,37 +25,34 @@ struct Login_Signup_View: View {
                 VStack
                 {
                     
-                    Text("Login:")
+                    Text("Login")
                         .foregroundColor(.black)
                         .padding([.top, .leading, .trailing])
                         .font(.title)
-                    HStack
+                    VStack
                     {
-                        VStack
-                        {
-                            TextField("Username", text: $username)
-                                .frame(width: 200, height: 30)
-                                .textFieldStyle(.roundedBorder)
-                                .disableAutocorrection(true)
-                                .cornerRadius(5)
-                                .padding()
-                            
-                            TextField("Password", text: $password)
-                                .frame(width: 200, height: 30)
-                                .textFieldStyle(.roundedBorder)
-                                .disableAutocorrection(true)
-                                .cornerRadius(5)
-                                .padding()
-                        }
+                        TextField("Username", text: $username)
+                            .frame(width: 200, height: 30)
+                            .textFieldStyle(.roundedBorder)
+                            .disableAutocorrection(true)
+                            .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                            .cornerRadius(5)
+                        
+                        TextField("Password", text: $password)
+                            .frame(width: 200, height: 30)
+                            .textFieldStyle(.roundedBorder)
+                            .disableAutocorrection(true)
+                            .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                            .cornerRadius(5)
+                        
                         Button
                         {
                             isLoggedIn = true
                         }label: {
-                            Text("Go")
+                            Text("Login")
                                 .foregroundColor(.white)
-                                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                                .frame(width: 80, height: 50)
                         }
-                        .frame(width: 70, height: 50)
                         .background(Color(.blue))
                         .cornerRadius(25)
                     }
@@ -65,12 +63,11 @@ struct Login_Signup_View: View {
                     
                     NavigationLink
                     {
-                        Signup_View()
+                        Signup_View(isSignedUp: $isSignedUp)
                             .navigationBarBackButtonHidden(true)
                     }label: {
                         Text("Signup")
                             .foregroundColor(.white)
-                            .font(.title)
                     }
                     .padding(.all)
                     .background(Color(.blue))
