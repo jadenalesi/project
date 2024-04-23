@@ -30,7 +30,7 @@ struct ExercisesView: View {
                             
                             NavigationLink
                             {
-                                ExDetails(exercise: exercise)
+                                ExDetails(exercise: exercise, currWorkout: workout)
                             }
                         label:{}
                         }

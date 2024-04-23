@@ -47,3 +47,14 @@ func GetExercises(day: Date) -> [Exercise] {
     }
     return newExerciseList
 }
+
+func RemoveExercise(deleteFrom: Workout, exToDelete: Exercise) {
+    var i = 0
+    for exercise in deleteFrom.exercises {
+        if (exercise.name == exToDelete.name) {
+            deleteFrom.exercises.remove(at: i)
+            break
+        }
+        i = i+1
+    }
+}
