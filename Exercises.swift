@@ -21,12 +21,14 @@ public class Workout: Identifiable {
     var name: String = ""
     var day = Date()
     var exercises = [Exercise]()
+    var repeating: Bool = false
 }
 
-func CreateNewWorkout(workName: String, workDay: Date) -> Workout {
+func CreateNewWorkout(workName: String, workDay: Date, repeatThis: Bool) -> Workout {
     let newWorkout = Workout()
     newWorkout.name = workName
     newWorkout.day = workDay
+    newWorkout.repeating = repeatThis
     return newWorkout
 }
 

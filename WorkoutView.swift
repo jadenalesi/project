@@ -11,6 +11,7 @@ struct WorkoutView: View {
     @State public var newWorkout: String = ""
     @State public var newWorkoutDay = Date()
     @State public var addWorkoutSheetShowing: Bool = false
+    @State public var newWorkoutRepeat: Bool = false
     @State public var opacity = 0.4
     var body: some View {
         VStack{
@@ -57,6 +58,8 @@ struct WorkoutView: View {
                     DatePicker("Select Date", selection: $newWorkoutDay, displayedComponents: [.date])
                         .padding()
                     
+                    Toggle("Repeat Every Week?", isOn: $newWorkoutRepeat)
+                    
                     Button(action: {AddingWorkout()}, label: {Text("Add")})
                         .frame(width: 70, height: 50)
                         .background(Color(.blue))
@@ -71,7 +74,7 @@ struct WorkoutView: View {
     {
         guard newWorkout.count > 0 else {return}
         
-        masterWorkouts.append(CreateNewWorkout(workName: newWorkout, workDay: newWorkoutDay))
+        masterWorkouts.append(CreateNewWorkout(workName: newWorkout, workDay: newWorkoutDay, repeatThis: newWorkoutRepeat))
         
         
         addWorkoutSheetShowing.toggle()
