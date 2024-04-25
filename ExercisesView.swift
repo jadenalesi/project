@@ -13,6 +13,7 @@ struct ExercisesView: View {
     @State var newExerciseSets = 1
     @State var newExerciseReps = 1
     @State var addExerciseSheetShowing: Bool = false
+    @State var doUpdate: Bool = false
     
     let workout: Workout
    
@@ -35,8 +36,11 @@ struct ExercisesView: View {
                     Button(action: { addExerciseSheetShowing.toggle() }) {
                         Image(systemName: "plus")
                     }
-                    Button(action: { RemoveWorkout(workoutToDelete: workout) }) {
+                    Button(action: { RemoveWorkout(workoutToDelete: workout);doUpdate = true }) {
                         Image(systemName: "trash")
+                    }
+                    .alert("Workout removed. You may leave this screen.", isPresented: $doUpdate) {
+                        Button("Ok", role: .cancel) {}
                     }
                 })
                 .sheet(isPresented: $addExerciseSheetShowing) {
@@ -59,8 +63,11 @@ struct ExercisesView: View {
                 }
             }
         }
+        .onAppear {
+            newExercise = "H"
+            newExercise = ""
+        }
     }
-   
     func AddingExercise() {
         guard newExercise.count > 0 else { return }
        
@@ -80,6 +87,9 @@ func RemoveWorkout(workoutToDelete: Workout) {
     }
 }
 
+class ExerciseList: ObservableObject {
+    
+}
 //#Preview {
 //    ExercisesView()
 //}
