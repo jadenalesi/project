@@ -10,13 +10,13 @@ import SwiftUI
 /*
  Here we have our Login/Signup view which is simply how we get to 2 different views (Login_View and Signup_View). This is done through a navigation view and links that take you to the other views.
  */
-
 struct Login_Signup_View: View {
     @State private var username = ""
     @State private var password = ""
     @State private var opacity = 0.4
-    @State var isSignedUp: Bool = false
+    @State var inSign: Bool = false
     @Binding var isLoggedIn: Bool
+    @Binding var enteringSign: Bool
     
     var body: some View {
         NavigationStack{
@@ -47,7 +47,7 @@ struct Login_Signup_View: View {
                         
                         Button
                         {
-                            isLoggedIn = true
+                            isLoggedIn.toggle()
                         }label: {
                             Text("Login")
                                 .foregroundColor(.white)
@@ -61,10 +61,9 @@ struct Login_Signup_View: View {
                         .padding([.top, .leading, .trailing])
                         .font(/*@START_MENU_TOKEN@*/.subheadline/*@END_MENU_TOKEN@*/)
                     
-                    NavigationLink
+                    Button
                     {
-                        Signup_View(isSignedUp: $isSignedUp)
-                            .navigationBarBackButtonHidden(true)
+                        enteringSign = true
                     }label: {
                         Text("Signup")
                             .foregroundColor(.white)

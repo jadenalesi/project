@@ -8,26 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var active:Bool = false
-    @State var isLoggedIn:Bool = false
-    @State var isSignedUp: Bool = false
+    @State var active: Bool = false
+    @State var isLoggedIn: Bool = false
+    @State var isSignedIn: Bool = false
+    @State var inSign: Bool = true
+    @State var enteringSign: Bool = false
     
     var body: some View {
+        
         if !active
         {
             Splash_Screen_View(active: $active)
         }
+        else if enteringSign && inSign
+        {
+            Signup_View(inSign: $inSign)
+        }
         else if !isLoggedIn
         {
-            Login_Signup_View(isLoggedIn: $isLoggedIn)
-        }
-        else if !isSignedUp && !isLoggedIn
-        {
-            Signup_View(isSignedUp: $isSignedUp)
-        }
-        else if isSignedUp && !isLoggedIn
-        {
-            Login_Signup_View(isLoggedIn: $isLoggedIn)
+            Login_Signup_View(isLoggedIn: $isLoggedIn, enteringSign: $enteringSign)
         }
         else
         {
@@ -37,7 +36,7 @@ struct ContentView: View {
 }
 
 struct MainContentView: View {
-    @State private var isLoggedIn = true
+    @State var isLoggedIn: Bool = false
     
     var body: some View {
         VStack {
@@ -71,6 +70,6 @@ struct MainContentView: View {
     }
 }
 
-#Preview {
-    MainContentView()
-}
+//#Preview {
+//    MainContentView()
+//}
