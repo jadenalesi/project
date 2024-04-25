@@ -14,7 +14,6 @@ struct Login_Signup_View: View {
     @State private var username = ""
     @State private var password = ""
     @State private var opacity = 0.4
-    @State var inSign: Bool = false
     @Binding var isLoggedIn: Bool
     @Binding var enteringSign: Bool
     
@@ -47,7 +46,7 @@ struct Login_Signup_View: View {
                         
                         Button
                         {
-                            isLoggedIn.toggle()
+                            isLoggedIn = true
                         }label: {
                             Text("Login")
                                 .foregroundColor(.white)

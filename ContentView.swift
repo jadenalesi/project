@@ -10,7 +10,6 @@ import SwiftUI
 struct ContentView: View {
     @State var active: Bool = false
     @State var isLoggedIn: Bool = false
-    @State var isSignedIn: Bool = false
     @State var inSign: Bool = true
     @State var enteringSign: Bool = false
     
@@ -23,6 +22,10 @@ struct ContentView: View {
         else if enteringSign && inSign
         {
             Signup_View(inSign: $inSign)
+        }
+        else if !inSign
+        {
+            MainContentView()
         }
         else if !isLoggedIn
         {

@@ -12,7 +12,6 @@ struct Signup_View: View {
     @State private var password = ""
     @State private var arrowSize = 0.3
     @Binding var inSign: Bool
-    @State var isLoggedIn: Bool = false
     
     var body: some View {
         NavigationStack
@@ -46,7 +45,7 @@ struct Signup_View: View {
                         .textFieldStyle(.roundedBorder)
                     Button
                     {
-                        inSign.toggle()
+                        inSign = false
                     }label: {Text ("Sign up")}
                         .foregroundColor(.white)
                         .frame(width: 80, height: 50)
