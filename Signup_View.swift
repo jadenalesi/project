@@ -32,7 +32,11 @@ struct Signup_View: View {
                         .padding([.leading, .bottom, .trailing])
                         .foregroundColor(.black)
                     
+
+                    TextField("New Username", text: $username)
+
                     TextField("New Username", text: $email)
+
                         .frame(width: 200, height: 35)
                         .textFieldStyle(.roundedBorder)
                         .disableAutocorrection(true)
@@ -46,6 +50,9 @@ struct Signup_View: View {
                         .textFieldStyle(.roundedBorder)
                     Button
                     {
+
+                        inSign = false
+
                         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                             
                             if let error = error
@@ -61,6 +68,7 @@ struct Signup_View: View {
                             }
                         }
                         
+
                     }label: {Text ("Sign up")}
                         .foregroundColor(.white)
                         .frame(width: 80, height: 50)

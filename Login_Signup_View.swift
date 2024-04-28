@@ -31,7 +31,11 @@ struct Login_Signup_View: View {
                         .font(.title)
                     VStack
                     {
+
+                        TextField("Username", text: $username)
+
                         TextField("Username", text: $email)
+
                             .frame(width: 200, height: 30)
                             .textFieldStyle(.roundedBorder)
                             .disableAutocorrection(true)
