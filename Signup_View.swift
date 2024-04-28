@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct Signup_View: View {
-    @State private var username = ""
+    @State private var email = ""
     @State private var password = ""
     @State private var arrowSize = 0.3
     @Binding var inSign: Bool
@@ -25,13 +26,17 @@ struct Signup_View: View {
                         .padding([.top, .leading, .trailing])
                         .foregroundColor(.black)
                     
-                    Text("Create your account below by entering a username and password.")
+                    Text("Create your account below by entering an email and password.")
                         .font(/*@START_MENU_TOKEN@*/.subheadline/*@END_MENU_TOKEN@*/)
                         .multilineTextAlignment(.center)
                         .padding([.leading, .bottom, .trailing])
                         .foregroundColor(.black)
                     
+
                     TextField("New Username", text: $username)
+
+                    TextField("New Username", text: $email)
+
                         .frame(width: 200, height: 35)
                         .textFieldStyle(.roundedBorder)
                         .disableAutocorrection(true)
@@ -45,7 +50,25 @@ struct Signup_View: View {
                         .textFieldStyle(.roundedBorder)
                     Button
                     {
+
                         inSign = false
+
+                        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                            
+                            if let error = error
+                            {
+                                email = ""
+                                password = ""
+                                return
+                            }
+                            
+                            if let authResult = authResult
+                            {
+                                inSign = false
+                            }
+                        }
+                        
+
                     }label: {Text ("Sign up")}
                         .foregroundColor(.white)
                         .frame(width: 80, height: 50)

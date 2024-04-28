@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 /*
  Here we have our Login/Signup view which is simply how we get to 2 different views (Login_View and Signup_View). This is done through a navigation view and links that take you to the other views.
  */
 struct Login_Signup_View: View {
-    @State private var username = ""
+    @State private var email = ""
     @State private var password = ""
     @State private var opacity = 0.4
     @Binding var isLoggedIn: Bool
@@ -30,7 +31,11 @@ struct Login_Signup_View: View {
                         .font(.title)
                     VStack
                     {
+
                         TextField("Username", text: $username)
+
+                        TextField("Username", text: $email)
+
                             .frame(width: 200, height: 30)
                             .textFieldStyle(.roundedBorder)
                             .disableAutocorrection(true)
@@ -46,7 +51,19 @@ struct Login_Signup_View: View {
                         
                         Button
                         {
-                            isLoggedIn = true
+                            Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+                                if let error = error{
+                                    email = ""
+                                    password = ""
+                                    print(error)
+                                    return
+                                }
+                                
+                                else
+                                {
+                                    isLoggedIn = true
+                                }
+                            }
                         }label: {
                             Text("Login")
                                 .foregroundColor(.white)
