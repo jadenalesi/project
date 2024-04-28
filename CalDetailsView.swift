@@ -24,6 +24,14 @@ struct CalDetailsView: View {
                         exerciseList = workout.exercises
                         break
                     }
+                    else if (workout.repeating){
+                        for i in 1...52{
+                            if (checkDate == workout.day + TimeInterval(i*604800)){
+                                exerciseList = workout.exercises
+                                break
+                            }
+                        }
+                    }
                 }
             }
             VStack {
