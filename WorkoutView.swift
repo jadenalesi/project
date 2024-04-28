@@ -58,7 +58,12 @@ struct WorkoutView: View {
                     DatePicker("Select Date", selection: $newWorkoutDay, displayedComponents: [.date])
                         .padding()
                     
-                    Toggle("Repeat Every Week?", isOn: $newWorkoutRepeat)
+                    HStack
+                    {
+                        Spacer()
+                        Toggle("Repeat Every Week?", isOn: $newWorkoutRepeat)
+                        Spacer()
+                    }
                     
                     Button(action: {AddingWorkout()}, label: {Text("Add")})
                         .frame(width: 70, height: 50)
