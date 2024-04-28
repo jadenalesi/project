@@ -55,6 +55,30 @@ final class FE_RebuildUITests: XCTestCase {
         app.windows.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.tap()
     
     }
+    func testRemoveWorkout() throws {
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["Go"].tap()
+        app.navigationBars["Your Workouts"].staticTexts["Your Workouts"].tap()
+        let workoutToDelete = app.tables.cells.element(boundBy: 0)
+        workoutToDelete.swipeLeft()
+        app.buttons["Delete"].tap()
+    }
+    
+    func testRemoveExercise() throws {
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["Go"].tap()
+        app.navigationBars["Your Workouts"].staticTexts["Your Workouts"].tap()
+        let workoutCell = app.tables.cells.element(boundBy: 0)
+        workoutCell.tap()
+        let exerciseToDelete = app.tables.cells.element(boundBy: 0)
+        exerciseToDelete.swipeLeft()
+        app.buttons["Delete"].tap()
+    }
+
+
+
 
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
